@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wildlife — Saffron Patel</title>
+  <meta name="description" content="Wildlife photography by Saffron Patel — creatures of the Galapagos Islands and beyond.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">SAFFRON PATEL</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="portraits.html">Portraits</a>
+      <a href="scenes.html">Scenes</a>
+      <a href="wildlife.html" class="active">Wildlife</a>
+      <a href="landscapes.html">Landscapes</a>
+    </nav>
+  </header>
+
+  <main class="gallery" data-category="wildlife">
+    <div class="masonry" id="masonry-grid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <span class="footer-name">SAFFRON PATEL</span>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
+    <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
+    <div class="lightbox-image-wrapper">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script src="js/photos.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
