@@ -57,7 +57,7 @@
 
         var caption = document.createElement('p');
         caption.className = 'caption';
-        caption.textContent = photo.location + ', ' + photo.date;
+        caption.textContent = photo.location + ' | ' + photo.date + (photo.award ? ' | ' + photo.award : '');
 
         item.appendChild(img);
         item.appendChild(caption);
@@ -106,7 +106,7 @@
         // Small delay then load new image
         setTimeout(function () {
           lightboxImg.src = 'images/' + category + '/full/' + photo.file;
-          lightboxCaption.textContent = photo.location + ', ' + photo.date;
+          lightboxCaption.textContent = photo.location + ' | ' + photo.date + (photo.award ? ' | ' + photo.award : '');
         }, 150);
 
         lightbox.classList.add('active');
@@ -128,7 +128,7 @@
         lightboxImg.style.opacity = '0';
         setTimeout(function () {
           lightboxImg.src = 'images/' + category + '/full/' + photo.file;
-          lightboxCaption.textContent = photo.location + ', ' + photo.date;
+          lightboxCaption.textContent = photo.location + ' | ' + photo.date + (photo.award ? ' | ' + photo.award : '');
         }, 150);
 
         preloadAdjacent(currentIndex);

@@ -23,9 +23,9 @@ window.PHOTOS = {
     { file: "portraits-15.jpg", location: "Hue, Vietnam", date: "January 2026", w: 800, h: 450 },
   ],
   scenes: [
-    { file: "scenes-01.jpg", location: "Kerela, India", date: "December 2019", w: 800, h: 533 },
-    { file: "scenes-02.jpg", location: "Kerela, India", date: "December 2019", w: 800, h: 533 },
-    { file: "scenes-03.jpg", location: "Kerela, India", date: "December 2019", w: 800, h: 533 },
+    { file: "scenes-02.jpg", location: "Kerala, India", date: "December 2019", award: "Awarded Scholastic Gold Key", w: 800, h: 533 },
+    { file: "scenes-01.jpg", location: "Kerala, India", date: "December 2019", w: 800, h: 533 },
+    { file: "scenes-03.jpg", location: "Kerala, India", date: "December 2019", w: 800, h: 533 },
     { file: "scenes-04.jpg", location: "Galapagos, Ecuador", date: "December 2025", w: 800, h: 533 },
     { file: "scenes-05.jpg", location: "Bangkok, Thailand", date: "February 2026", w: 800, h: 800 },
     { file: "scenes-06.jpg", location: "Hue, Vietnam", date: "January 2026", w: 450, h: 800 },
