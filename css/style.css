@@ -147,7 +147,7 @@ footer {
 }
 
 .featured-image-wrapper img {
-  height: 52vh;
+  height: 38vh;
   width: auto;
   max-width: none !important;
   display: block;
@@ -337,7 +337,7 @@ footer {
   }
 
   .featured-image-wrapper img {
-    height: 38vh;
+    height: 30vh;
   }
 
   .gallery {
@@ -377,7 +377,7 @@ footer {
   }
 
   .featured-image-wrapper img {
-    height: 28vh;
+    height: 23vh;
   }
 
   .gallery {
@@ -405,7 +405,7 @@ footer {
 /* Small mobile */
 @media (max-width: 420px) {
   .featured-image-wrapper img {
-    height: 22vh;
+    height: 19vh;
   }
 }
 
