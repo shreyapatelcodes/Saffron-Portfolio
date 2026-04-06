@@ -42,6 +42,11 @@
     var category = galleryMain.getAttribute('data-category');
     var photos = window.PHOTOS && window.PHOTOS[category];
     var grid = document.getElementById('masonry-grid');
+    var assetVersion = '20260406';
+
+    function galleryImageUrl(size, file) {
+      return 'images/' + category + '/' + size + '/' + file + '?v=' + assetVersion;
+    }
 
     if (photos && grid) {
       photos.forEach(function (photo, index) {
@@ -49,7 +54,7 @@
         item.className = 'masonry-item';
 
         var img = document.createElement('img');
-        img.src = 'images/' + category + '/thumb/' + photo.file;
+        img.src = galleryImageUrl('thumb', photo.file);
         img.alt = photo.location;
         img.loading = index < 6 ? 'eager' : 'lazy';
         img.style.aspectRatio = photo.w + ' / ' + photo.h;
@@ -105,7 +110,7 @@
 
         // Small delay then load new image
         setTimeout(function () {
-          lightboxImg.src = 'images/' + category + '/full/' + photo.file;
+          lightboxImg.src = galleryImageUrl('full', photo.file);
           lightboxCaption.textContent = photo.location + ' | ' + photo.date + (photo.award ? ' | ' + photo.award : '');
         }, 150);
 
@@ -127,7 +132,7 @@
 
         lightboxImg.style.opacity = '0';
         setTimeout(function () {
-          lightboxImg.src = 'images/' + category + '/full/' + photo.file;
+          lightboxImg.src = galleryImageUrl('full', photo.file);
           lightboxCaption.textContent = photo.location + ' | ' + photo.date + (photo.award ? ' | ' + photo.award : '');
         }, 150);
 
@@ -137,8 +142,8 @@
       function preloadAdjacent(index) {
         var next = (index + 1) % photos.length;
         var prev = (index - 1 + photos.length) % photos.length;
-        new Image().src = 'images/' + category + '/full/' + photos[next].file;
-        new Image().src = 'images/' + category + '/full/' + photos[prev].file;
+        new Image().src = galleryImageUrl('full', photos[next].file);
+        new Image().src = galleryImageUrl('full', photos[prev].file);
       }
 
       // Fade in image once loaded
