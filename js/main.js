@@ -213,6 +213,157 @@
           }
         }
       }, { passive: true });
+
+      // --- Drag Reorder ---
+      var EDIT_PASSWORD = 'sAfpic$';
+      var editMode = false;
+      var hasUnsavedChanges = false;
+      var originalOrder = photos.map(function (p) { return p.file; });
+
+      // Lock button
+      var lockBtn = document.createElement('button');
+      lockBtn.id = 'gallery-lock-btn';
+      lockBtn.title = 'Toggle edit mode';
+      lockBtn.textContent = '🔒';
+      document.body.appendChild(lockBtn);
+
+      // Save / Discard controls
+      var editControls = document.createElement('div');
+      editControls.className = 'gallery-edit-controls';
+      editControls.innerHTML =
+        '<button class="btn-save">Save</button>' +
+        '<button class="btn-discard">Discard</button>';
+      document.body.appendChild(editControls);
+
+      function getCurrentOrder() {
+        return Array.from(grid.querySelectorAll('.masonry-item img')).map(function (img) {
+          return img.getAttribute('src').split('/').pop().split('?')[0];
+        });
+      }
+
+      function enableEditMode() {
+        editMode = true;
+        document.body.classList.add('gallery-edit-mode');
+        lockBtn.textContent = '🔓';
+        lockBtn.classList.add('edit-active');
+        grid.querySelectorAll('.masonry-item').forEach(function (item) {
+          item.setAttribute('draggable', 'true');
+        });
+      }
+
+      function disableEditMode() {
+        editMode = false;
+        document.body.classList.remove('gallery-edit-mode');
+        lockBtn.textContent = '🔒';
+        lockBtn.classList.remove('edit-active');
+        editControls.classList.remove('visible');
+        hasUnsavedChanges = false;
+        grid.querySelectorAll('.masonry-item').forEach(function (item) {
+          item.removeAttribute('draggable');
+        });
+      }
+
+      lockBtn.addEventListener('click', function () {
+        if (editMode) {
+          if (hasUnsavedChanges) {
+            if (confirm('You have unsaved changes. Discard them?')) {
+              discardChanges();
+              disableEditMode();
+            }
+          } else {
+            disableEditMode();
+          }
+        } else {
+          var pw = prompt('Enter password to edit gallery order:');
+          if (pw === EDIT_PASSWORD) {
+            enableEditMode();
+          }
+        }
+      });
+
+      // Save
+      editControls.querySelector('.btn-save').addEventListener('click', function () {
+        var order = getCurrentOrder();
+        localStorage.setItem('gallery-order-' + category, JSON.stringify(order));
+        originalOrder = order;
+        hasUnsavedChanges = false;
+        editControls.classList.remove('visible');
+      });
+
+      // Discard
+      function discardChanges() {
+        var items = Array.from(grid.querySelectorAll('.masonry-item'));
+        var itemMap = {};
+        items.forEach(function (item) {
+          var file = item.querySelector('img').getAttribute('src').split('/').pop().split('?')[0];
+          itemMap[file] = item;
+        });
+        originalOrder.forEach(function (file) {
+          if (itemMap[file]) grid.appendChild(itemMap[file]);
+        });
+        hasUnsavedChanges = false;
+        editControls.classList.remove('visible');
+      }
+
+      editControls.querySelector('.btn-discard').addEventListener('click', function () {
+        discardChanges();
+      });
+
+      // Drag and Drop
+      var dragSrcItem = null;
+
+      grid.addEventListener('dragstart', function (e) {
+        var item = e.target.closest('.masonry-item');
+        if (!item || !editMode) return;
+        dragSrcItem = item;
+        item.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      grid.addEventListener('dragend', function (e) {
+        var item = e.target.closest('.masonry-item');
+        if (item) item.classList.remove('dragging');
+        grid.querySelectorAll('.masonry-item').forEach(function (i) {
+          i.classList.remove('drag-over');
+        });
+        dragSrcItem = null;
+      });
+
+      grid.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        var item = e.target.closest('.masonry-item');
+        if (!item || item === dragSrcItem) return;
+        grid.querySelectorAll('.masonry-item').forEach(function (i) {
+          i.classList.remove('drag-over');
+        });
+        item.classList.add('drag-over');
+      });
+
+      grid.addEventListener('dragleave', function (e) {
+        var item = e.target.closest('.masonry-item');
+        if (item) item.classList.remove('drag-over');
+      });
+
+      grid.addEventListener('drop', function (e) {
+        e.preventDefault();
+        var targetItem = e.target.closest('.masonry-item');
+        if (!targetItem || !dragSrcItem || targetItem === dragSrcItem) return;
+        targetItem.classList.remove('drag-over');
+
+        // Swap positions in DOM
+        var allItems = Array.from(grid.querySelectorAll('.masonry-item'));
+        var srcIdx = allItems.indexOf(dragSrcItem);
+        var tgtIdx = allItems.indexOf(targetItem);
+
+        if (srcIdx < tgtIdx) {
+          grid.insertBefore(dragSrcItem, targetItem.nextSibling);
+        } else {
+          grid.insertBefore(dragSrcItem, targetItem);
+        }
+
+        hasUnsavedChanges = true;
+        editControls.classList.add('visible');
+      });
     }
   }
 
