@@ -49,6 +49,21 @@
     }
 
     if (photos && grid) {
+      // Load saved order if present
+      var savedOrder = localStorage.getItem('gallery-order-' + category);
+      if (savedOrder) {
+        try {
+          var savedFiles = JSON.parse(savedOrder);
+          var photoMap = {};
+          photos.forEach(function (p) { photoMap[p.file] = p; });
+          var reordered = [];
+          savedFiles.forEach(function (f) { if (photoMap[f]) reordered.push(photoMap[f]); });
+          // Append any photos not in saved order (newly added images)
+          photos.forEach(function (p) { if (reordered.indexOf(p) === -1) reordered.push(p); });
+          photos = reordered;
+        } catch (e) { /* ignore corrupt data */ }
+      }
+
       photos.forEach(function (photo, index) {
         var item = document.createElement('div');
         item.className = 'masonry-item';
