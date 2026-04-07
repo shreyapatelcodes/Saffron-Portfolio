@@ -57,9 +57,10 @@
           var photoMap = {};
           photos.forEach(function (p) { photoMap[p.file] = p; });
           var reordered = [];
-          savedFiles.forEach(function (f) { if (photoMap[f]) reordered.push(photoMap[f]); });
+          var seen = {};
+          savedFiles.forEach(function (f) { if (photoMap[f]) { reordered.push(photoMap[f]); seen[f] = true; } });
           // Append any photos not in saved order (newly added images)
-          photos.forEach(function (p) { if (reordered.indexOf(p) === -1) reordered.push(p); });
+          photos.forEach(function (p) { if (!seen[p.file]) reordered.push(p); });
           photos = reordered;
         } catch (e) { /* ignore corrupt data */ }
       }
