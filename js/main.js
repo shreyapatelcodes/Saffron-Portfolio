@@ -86,7 +86,7 @@
 
         // Click to open lightbox
         img.addEventListener('click', function () {
-          openLightbox(index);
+          if (!editMode) openLightbox(index);
         });
       });
 
