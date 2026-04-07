@@ -341,7 +341,9 @@
 
       grid.addEventListener('dragleave', function (e) {
         var item = e.target.closest('.masonry-item');
-        if (item) item.classList.remove('drag-over');
+        if (item && !item.contains(e.relatedTarget)) {
+          item.classList.remove('drag-over');
+        }
       });
 
       grid.addEventListener('drop', function (e) {
