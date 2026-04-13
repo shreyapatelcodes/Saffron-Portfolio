@@ -214,6 +214,18 @@
         }
       }, { passive: true });
 
+      // --- Deep-link to photo lightbox via hash ---
+      var hashMatch = location.hash.match(/^#photo=(.+)$/);
+      if (hashMatch) {
+        var targetFile = decodeURIComponent(hashMatch[1]);
+        for (var i = 0; i < photos.length; i++) {
+          if (photos[i].file === targetFile) {
+            openLightbox(i);
+            break;
+          }
+        }
+      }
+
       // --- Drag Reorder ---
       var EDIT_PASSWORD = 'sAfpic$';
       var editMode = false;
