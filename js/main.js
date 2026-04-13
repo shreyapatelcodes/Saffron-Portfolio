@@ -42,7 +42,7 @@
     var category = galleryMain.getAttribute('data-category');
     var photos = window.PHOTOS && window.PHOTOS[category];
     var grid = document.getElementById('masonry-grid');
-    var assetVersion = '20260406';
+    var assetVersion = '20260413';
 
     function galleryImageUrl(size, file) {
       return 'images/' + category + '/' + size + '/' + file + '?v=' + assetVersion;
@@ -213,6 +213,18 @@
           }
         }
       }, { passive: true });
+
+      // --- Deep-link to photo lightbox via hash ---
+      var hashMatch = location.hash.match(/^#photo=(.+)$/);
+      if (hashMatch) {
+        var targetFile = decodeURIComponent(hashMatch[1]);
+        for (var i = 0; i < photos.length; i++) {
+          if (photos[i].file === targetFile) {
+            openLightbox(i);
+            break;
+          }
+        }
+      }
 
       // --- Drag Reorder ---
       var EDIT_PASSWORD = 'sAfpic$';
