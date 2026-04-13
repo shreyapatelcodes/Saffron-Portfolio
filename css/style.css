@@ -120,6 +120,26 @@ footer {
   letter-spacing: 0.06em;
 }
 
+/* --- Announcement Banner --- */
+.announcement-banner {
+  text-align: center;
+  padding: 0.65rem 2rem;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.announcement-banner a {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  transition: opacity 0.3s ease;
+}
+
+.announcement-banner a:hover {
+  opacity: 0.7;
+}
+
 /* --- Homepage Featured Grid --- */
 .home {
   flex: 1;

@@ -120,7 +120,7 @@ window.PHOTOS = {
     { file: "scenes-65.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
     { file: "scenes-66.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
     { file: "scenes-67.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
-    { file: "scenes-68.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
+    { file: "scenes-68.jpg", location: "Inle Lake, Myanmar", date: "January 2026", award: "Finalist — National Geographic Traveller (UK) Rising Star 2026", w: 800, h: 533 },
     { file: "scenes-69.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
     { file: "scenes-70.jpg", location: "Inle Lake, Myanmar", date: "January 2026", w: 800, h: 533 },
     { file: "scenes-71.jpg", location: "Hanoi, Vietnam", date: "January 2026", w: 800, h: 533 },
