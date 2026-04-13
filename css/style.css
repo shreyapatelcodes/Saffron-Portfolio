@@ -123,26 +123,16 @@ footer {
 
 /* --- Announcement Banner --- */
 .announcement-banner {
-  width: 100%;
+  width: calc(100% + 7rem);
   text-align: center;
   padding: 0.5rem 2rem;
   margin-top: 1.8rem;
-  background: #1a1a1a;
   margin-left: -3.5rem;
-  margin-right: -3.5rem;
-  width: calc(100% + 7rem);
-}
-
-.announcement-banner a {
+  background: #1a1a1a;
+  color: #ffffff;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.06em;
-  color: #ffffff;
-  transition: opacity 0.3s ease;
-}
-
-.announcement-banner a:hover {
-  opacity: 0.7;
 }
 
 /* --- Homepage Featured Grid --- */
