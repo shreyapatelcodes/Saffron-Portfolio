@@ -42,7 +42,7 @@
     var category = galleryMain.getAttribute('data-category');
     var photos = window.PHOTOS && window.PHOTOS[category];
     var grid = document.getElementById('masonry-grid');
-    var assetVersion = '20260406';
+    var assetVersion = '20260413';
 
     function galleryImageUrl(size, file) {
       return 'images/' + category + '/' + size + '/' + file + '?v=' + assetVersion;
